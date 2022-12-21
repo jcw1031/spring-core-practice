@@ -1,11 +1,9 @@
-package woopaca.practice.member;
+package woopaca.practice.member.service;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import woopaca.practice.member.entity.Grade;
 import woopaca.practice.member.entity.Member;
-import woopaca.practice.member.service.MemberService;
-import woopaca.practice.member.service.MemberServiceImpl;
 
 public class MemberServiceTest {
 
