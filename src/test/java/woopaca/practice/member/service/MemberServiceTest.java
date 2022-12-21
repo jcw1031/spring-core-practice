@@ -12,11 +12,11 @@ public class MemberServiceTest {
     @Test
     void 회원가입() {
         //given
-        Member member = new Member(1L, "Woopaca", Grade.VIP);
+        Member member = new Member("jcw1031", "Woopaca", Grade.VIP);
 
         //when
         memberService.join(member);
-        Member findMember = memberService.findMember(1L);
+        Member findMember = memberService.findMember("jcw1031");
 
         //then
         Assertions.assertThat(member).isEqualTo(findMember);

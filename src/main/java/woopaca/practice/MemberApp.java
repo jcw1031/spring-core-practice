@@ -10,11 +10,11 @@ public class MemberApp {
     public static void main(String[] args) {
 
         MemberService memberService = new MemberServiceImpl();
-        Member member = new Member(1L, "woopaca", Grade.VIP);
+        Member member = new Member("jcw1031", "woopaca", Grade.VIP);
 
         memberService.join(member);
 
-        Member findMember = memberService.findMember(1L);
+        Member findMember = memberService.findMember("jcw1031");
         System.out.println("member = " + member);
         System.out.println("findMember = " + findMember);
     }

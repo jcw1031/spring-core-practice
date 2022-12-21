@@ -2,21 +2,21 @@ package woopaca.practice.member.entity;
 
 public class Member {
 
-    private Long id;
+    private String id;
     private String name;
     private Grade grade;
 
-    public Member(Long id, String name, Grade grade) {
+    public Member(String id, String name, Grade grade) {
         this.id = id;
         this.name = name;
         this.grade = grade;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,7 +39,7 @@ public class Member {
     @Override
     public String toString() {
         return "Member{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", grade=" + grade +
                 '}';
