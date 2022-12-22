@@ -3,13 +3,16 @@ package woopaca.practice.item.service;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
 import woopaca.practice.item.repository.ItemRepository;
-import woopaca.practice.item.repository.MemoryItemRepository;
 
 import java.util.List;
 
 public class ItemServiceImpl implements ItemService {
 
-    private final ItemRepository itemRepository = new MemoryItemRepository();
+    private final ItemRepository itemRepository;
+
+    public ItemServiceImpl(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
 
     @Override
     public void register(Item item) {

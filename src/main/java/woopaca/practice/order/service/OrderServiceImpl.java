@@ -12,8 +12,13 @@ import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderRepository orderRepository = new MemoryOrderRepository();
-    private final DiscountPolicy discountPolicy = new FlexibleDiscountPolicy();
+    private final OrderRepository orderRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(OrderRepository orderRepository, DiscountPolicy discountPolicy) {
+        this.orderRepository = orderRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Member member, Item item) {

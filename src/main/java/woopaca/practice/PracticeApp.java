@@ -1,17 +1,15 @@
 package woopaca.practice;
 
+import woopaca.practice.config.AppConfig;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
 import woopaca.practice.item.service.ItemService;
-import woopaca.practice.item.service.ItemServiceImpl;
 import woopaca.practice.member.entity.Grade;
 import woopaca.practice.member.entity.Member;
 import woopaca.practice.member.service.MemberService;
-import woopaca.practice.member.service.MemberServiceImpl;
 import woopaca.practice.order.entity.Order;
 import woopaca.practice.order.service.OrderService;
-import woopaca.practice.order.service.OrderServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,13 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeApp {
-
-    private static final MemberService memberService = new MemberServiceImpl();
-    private static final OrderService orderService = new OrderServiceImpl();
-    private static final ItemService itemService = new ItemServiceImpl();
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static MemberService memberService;
+    private static OrderService orderService;
+    private static ItemService itemService;
 
     public static void main(String[] args) throws IOException {
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+        orderService = appConfig.orderService();
+        itemService = appConfig.itemService();
+
         List<Item> list = new ArrayList<>();
         list.add(new Item(1L, "맥북", 3400000, Category.IT));
         list.add(new Item(2L, "아이폰", 1290000, Category.IT));

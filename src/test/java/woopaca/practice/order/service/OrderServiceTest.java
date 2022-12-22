@@ -1,7 +1,9 @@
 package woopaca.practice.order.service;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import woopaca.practice.config.AppConfig;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
 import woopaca.practice.member.entity.Grade;
@@ -12,12 +14,18 @@ import java.util.List;
 
 public class OrderServiceTest {
 
-    OrderService orderService = new OrderServiceImpl();
+    OrderService orderService;
+
+    @BeforeEach
+    void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        orderService = appConfig.orderService();
+    }
 
     @Test
     void 주문() {
         //given
-        Member member = new Member(1L, "지찬우", Grade.VIP);
+        Member member = new Member("jcw1031", "지찬우", Grade.VIP);
         Item item1 = new Item(1L, "맥북", 3400000, Category.IT);
         Item item2 = new Item(2L, "아이폰", 1200000, Category.IT);
 
