@@ -2,6 +2,9 @@ package woopaca.practice;
 
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.item.entity.Category;
+import woopaca.practice.item.entity.Item;
+import woopaca.practice.item.service.ItemService;
+import woopaca.practice.item.service.ItemServiceImpl;
 import woopaca.practice.member.entity.Grade;
 import woopaca.practice.member.entity.Member;
 import woopaca.practice.member.service.MemberService;
@@ -13,15 +16,31 @@ import woopaca.practice.order.service.OrderServiceImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeApp {
 
     private static final MemberService memberService = new MemberServiceImpl();
     private static final OrderService orderService = new OrderServiceImpl();
+    private static final ItemService itemService = new ItemServiceImpl();
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
+        List<Item> list = new ArrayList<>();
+        list.add(new Item(1L, "맥북", 3400000, Category.IT));
+        list.add(new Item(2L, "아이폰", 1290000, Category.IT));
+        list.add(new Item(3L, "한돈 삼겹살 600g", 19900, Category.FOOD));
+        list.add(new Item(4L, "아메리카노", 2500, Category.FOOD));
+        list.add(new Item(5L, "DESKER 책상", 187000, Category.LIVING));
+        list.add(new Item(6L, "dyson 청소기", 579000, Category.LIVING));
+        list.add(new Item(7L, "공책", 4000, Category.ETC));
+        list.add(new Item(8L, "볼펜", 7000, Category.ETC));
+        list.add(new Item(9L, "백팩", 119000, Category.ETC));
+
+        for (Item item : list) {
+            itemService.register(item);
+        }
 
         isMemberOrNotMember();
 
@@ -33,10 +52,14 @@ public class PracticeApp {
 
         if (input.equals("y")) {
             isMember();
+            return;
         }
         if (input.equals("n")) {
             isNotMember();
+            return;
         }
+
+        System.out.println(ErrorMessage.SELECT_ERROR);
     }
 
     public static void isMember() throws IOException {
@@ -63,7 +86,8 @@ public class PracticeApp {
         name = br.readLine();
 
         Member member = new Member(id, name, Grade.BASIC);
-        loginSuccess(member);
+        memberService.join(member);
+        isMember();
     }
 
     public static void loginSuccess(Member member) throws IOException {
@@ -108,16 +132,20 @@ public class PracticeApp {
 
             switch (category) {
                 case 1: {
-
+                    getItemByCategory(Category.IT);
+                    break;
                 }
                 case 2: {
-
+                    getItemByCategory(Category.FOOD);
+                    break;
                 }
                 case 3: {
-
+                    getItemByCategory(Category.LIVING);
+                    break;
                 }
                 case 4: {
-
+                    getItemByCategory(Category.ETC);
+                    break;
                 }
                 case 5: {
                     isGoBack = true;
@@ -152,6 +180,16 @@ public class PracticeApp {
     }
 
     public static void getItemByCategory(Category category) {
+        List<Item> list = itemService.itemListInCategory(category);
+        if (list == null) {
+            System.out.println(ErrorMessage.ITEM_LIST_EMPTY);
+            return;
+        }
 
+        for (Item item : list) {
+            System.out.println("-------");
+            System.out.println("상품 이름 : " + item.getItemName() + "\t\t상품 가격 : " + item.getItemPrice());
+        }
+        System.out.println();
     }
 }
