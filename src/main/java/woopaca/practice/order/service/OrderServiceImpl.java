@@ -1,11 +1,9 @@
 package woopaca.practice.order.service;
 
 import woopaca.practice.discount.DiscountPolicy;
-import woopaca.practice.discount.FlexibleDiscountPolicy;
 import woopaca.practice.item.entity.Item;
 import woopaca.practice.member.entity.Member;
 import woopaca.practice.order.entity.Order;
-import woopaca.practice.order.repository.MemoryOrderRepository;
 import woopaca.practice.order.repository.OrderRepository;
 
 import java.util.List;

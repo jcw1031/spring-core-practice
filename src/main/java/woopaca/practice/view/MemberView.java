@@ -1,5 +1,7 @@
 package woopaca.practice.view;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import woopaca.practice.config.AppConfig;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.member.entity.Grade;
@@ -16,8 +18,10 @@ public class MemberView {
     private final MemberService memberService;
 
     public MemberView() {
-        AppConfig appConfig = new AppConfig();
-        this.memberService = appConfig.memberService();
+//        AppConfig appConfig = new AppConfig();
+//        this.memberService = appConfig.memberService();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        memberService = applicationContext.getBean("memberService", MemberService.class);
     }
 
     public void isMember() throws IOException {

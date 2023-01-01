@@ -1,5 +1,7 @@
 package woopaca.practice.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import woopaca.practice.discount.DiscountPolicy;
 import woopaca.practice.discount.FlexibleDiscountPolicy;
 import woopaca.practice.item.repository.ItemRepository;
@@ -15,11 +17,13 @@ import woopaca.practice.order.repository.OrderRepository;
 import woopaca.practice.order.service.OrderService;
 import woopaca.practice.order.service.OrderServiceImpl;
 
+@Configuration
 public class AppConfig {
 
     /**
      * MemberService
      */
+    @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
@@ -27,6 +31,7 @@ public class AppConfig {
     /**
      * OrderService
      */
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(orderRepository(), discountPolicy());
     }
@@ -34,6 +39,7 @@ public class AppConfig {
     /**
      * ItemService
      */
+    @Bean
     public ItemService itemService() {
         return new ItemServiceImpl(itemRepository());
     }
@@ -41,28 +47,32 @@ public class AppConfig {
     /**
      * MemberRepository
      */
-    private MemberRepository memberRepository() {
+    @Bean
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
     /**
      * OrderRepository
      */
-    private OrderRepository orderRepository() {
+    @Bean
+    public OrderRepository orderRepository() {
         return new MemoryOrderRepository();
     }
 
     /**
      * ItemRepository
      */
-    private ItemRepository itemRepository() {
+    @Bean
+    public ItemRepository itemRepository() {
         return new MemoryItemRepository();
     }
 
     /**
      * DiscountPolicy
      */
-    private DiscountPolicy discountPolicy() {
+    @Bean
+    public DiscountPolicy discountPolicy() {
         return new FlexibleDiscountPolicy();
     }
 
