@@ -1,3 +1,4 @@
+/*
 package woopaca.practice.config;
 
 import org.springframework.context.annotation.Bean;
@@ -20,60 +21,75 @@ import woopaca.practice.order.service.OrderServiceImpl;
 @Configuration
 public class AppConfig {
 
-    /**
+    */
+/**
      * MemberService
-     */
+     *//*
+
     @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
 
-    /**
+    */
+/**
      * OrderService
-     */
+     *//*
+
     @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(orderRepository(), discountPolicy());
     }
 
-    /**
+    */
+/**
      * ItemService
-     */
+     *//*
+
     @Bean
     public ItemService itemService() {
         return new ItemServiceImpl(itemRepository());
     }
 
-    /**
+    */
+/**
      * MemberRepository
-     */
+     *//*
+
     @Bean
     public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
-    /**
+    */
+/**
      * OrderRepository
-     */
+     *//*
+
     @Bean
     public OrderRepository orderRepository() {
         return new MemoryOrderRepository();
     }
 
-    /**
+    */
+/**
      * ItemRepository
-     */
+     *//*
+
     @Bean
     public ItemRepository itemRepository() {
         return new MemoryItemRepository();
     }
 
-    /**
+    */
+/**
      * DiscountPolicy
-     */
+     *//*
+
     @Bean
     public DiscountPolicy discountPolicy() {
         return new FlexibleDiscountPolicy();
     }
 
 }
+*/

@@ -1,33 +1,22 @@
 package woopaca.practice;
 
-import woopaca.practice.config.AppConfig;
-import woopaca.practice.exception.ErrorMessage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
 import woopaca.practice.item.service.ItemService;
-import woopaca.practice.member.entity.Member;
-import woopaca.practice.member.service.MemberService;
-import woopaca.practice.order.entity.Order;
-import woopaca.practice.order.service.OrderService;
 import woopaca.practice.view.StartView;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeApp {
-    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static MemberService memberService;
-    private static OrderService orderService;
     private static ItemService itemService;
 
     public static void main(String[] args) throws IOException {
-        AppConfig appConfig = new AppConfig();
-        memberService = appConfig.memberService();
-        orderService = appConfig.orderService();
-        itemService = appConfig.itemService();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        itemService = applicationContext.getBean(ItemService.class);
 
         List<Item> list = new ArrayList<>();
         list.add(new Item(1L, "맥북", 3400000, Category.IT));
@@ -44,7 +33,7 @@ public class PracticeApp {
             itemService.register(item);
         }
 
-        StartView startView = new StartView();
+        new StartView();
 
     }
 }

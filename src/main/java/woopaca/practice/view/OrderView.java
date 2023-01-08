@@ -2,7 +2,7 @@ package woopaca.practice.view;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import woopaca.practice.config.AppConfig;
+import woopaca.practice.AutoAppConfig;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
@@ -21,10 +21,8 @@ public class OrderView {
     private final OrderService orderService;
 
     public OrderView() {
-//        AppConfig appConfig = new AppConfig();
-//        this.orderService = appConfig.orderService();
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        orderService = applicationContext.getBean("orderService", OrderService.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        orderService = applicationContext.getBean(OrderService.class);
     }
 
     public void order(Member member) throws IOException {

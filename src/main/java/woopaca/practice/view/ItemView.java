@@ -2,7 +2,7 @@ package woopaca.practice.view;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import woopaca.practice.config.AppConfig;
+import woopaca.practice.AutoAppConfig;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
@@ -19,12 +19,8 @@ public class ItemView {
     private final ItemService itemService;
 
     public ItemView() {
-//        AppConfig appConfig = new AppConfig();
-//        this.itemService = appConfig.itemService();
-
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        itemService = applicationContext.getBean("itemService", ItemService.class);
-
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        itemService = applicationContext.getBean(ItemService.class);
     }
 
     public Item getItemByCategory(Category category) throws IOException {

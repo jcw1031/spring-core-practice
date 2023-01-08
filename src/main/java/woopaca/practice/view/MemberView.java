@@ -2,7 +2,7 @@ package woopaca.practice.view;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import woopaca.practice.config.AppConfig;
+import woopaca.practice.AutoAppConfig;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.member.entity.Grade;
 import woopaca.practice.member.entity.Member;
@@ -18,10 +18,8 @@ public class MemberView {
     private final MemberService memberService;
 
     public MemberView() {
-//        AppConfig appConfig = new AppConfig();
-//        this.memberService = appConfig.memberService();
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        memberService = applicationContext.getBean("memberService", MemberService.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        memberService = applicationContext.getBean(MemberService.class);
     }
 
     public void isMember() throws IOException {

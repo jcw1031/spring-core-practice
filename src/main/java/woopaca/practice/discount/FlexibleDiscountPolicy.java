@@ -1,8 +1,10 @@
 package woopaca.practice.discount;
 
+import org.springframework.stereotype.Component;
 import woopaca.practice.member.entity.Grade;
 import woopaca.practice.member.entity.Member;
 
+@Component
 public class FlexibleDiscountPolicy implements DiscountPolicy {
 
     @Override

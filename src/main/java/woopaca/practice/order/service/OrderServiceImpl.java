@@ -1,5 +1,7 @@
 package woopaca.practice.order.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import woopaca.practice.discount.DiscountPolicy;
 import woopaca.practice.item.entity.Item;
 import woopaca.practice.member.entity.Member;
@@ -8,11 +10,13 @@ import woopaca.practice.order.repository.OrderRepository;
 
 import java.util.List;
 
+@Component
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, DiscountPolicy discountPolicy) {
         this.orderRepository = orderRepository;
         this.discountPolicy = discountPolicy;

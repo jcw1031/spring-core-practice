@@ -1,5 +1,6 @@
 package woopaca.practice.item.repository;
 
+import org.springframework.stereotype.Component;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
 
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class MemoryItemRepository implements ItemRepository {
 
     private static final Map<Category, List<Item>> memory = new HashMap<>();

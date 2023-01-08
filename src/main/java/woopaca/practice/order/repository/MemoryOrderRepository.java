@@ -1,5 +1,6 @@
 package woopaca.practice.order.repository;
 
+import org.springframework.stereotype.Component;
 import woopaca.practice.member.entity.Member;
 import woopaca.practice.order.entity.Order;
 
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class MemoryOrderRepository implements OrderRepository {
 
     Map<Member, List<Order>> memory = new HashMap<>();

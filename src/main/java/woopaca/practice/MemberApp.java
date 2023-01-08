@@ -1,6 +1,7 @@
 package woopaca.practice;
 
-import woopaca.practice.config.AppConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import woopaca.practice.member.entity.Grade;
 import woopaca.practice.member.entity.Member;
 import woopaca.practice.member.service.MemberService;
@@ -8,9 +9,9 @@ import woopaca.practice.member.service.MemberService;
 public class MemberApp {
 
     public static void main(String[] args) {
-        AppConfig appConfig = new AppConfig();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
 
-        MemberService memberService = appConfig.memberService();
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
         Member member = new Member("jcw1031", "woopaca", Grade.VIP);
 
         memberService.join(member);
