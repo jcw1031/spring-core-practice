@@ -74,14 +74,14 @@ public class OrderView {
 
     public void getOrderList(Member member) {
         System.out.println("[ 주문 조회 ]");
-        List<Order> list = orderService.findOrderList(member);
+        List<Order> orderList = orderService.findOrderList(member);
 
-        if (list == null) {
+        if (orderList == null) {
             System.out.println(ErrorMessage.ORDER_LIST_EMPTY);
             return;
         }
 
-        for (Order order : list) {
+        for (Order order : orderList) {
             System.out.println("-------");
             System.out.println("상품 이름 : " + order.getItem().getItemName() + "\t\t상품 가격 : " + order.getPrice() + "\t\t결제 금액 : " + order.calculateDiscount());
         }

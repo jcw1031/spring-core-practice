@@ -26,13 +26,7 @@ public class MemberView {
         System.out.println("\n아이디가 무엇인가요?");
         String id = br.readLine();
 
-        Member member = memberService.findMember(id);
-        if (member == null) {
-            System.out.println(ErrorMessage.LOGIN_ERROR);
-            return;
-        }
-
-        loginSuccess(member);
+        loginSuccess(memberService.validateMember(id));
     }
 
     public void isNotMember() throws IOException {

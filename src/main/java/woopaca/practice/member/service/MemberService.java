@@ -6,6 +6,8 @@ public interface MemberService {
 
     void join(Member member);
 
+    Member validateMember(String id);
+
     Member findMember(String id);
 
 }
