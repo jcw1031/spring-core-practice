@@ -29,10 +29,11 @@ public class OrderView {
 
         while (true) {
             System.out.println("어떤 상품을 구매하시겠어요? [ 1.IT  2.Food  3.Living  4.ETC  5.뒤로 가기]");
-            int category = Integer.parseInt(br.readLine());
             boolean isGoBack = false;
 
             try {
+                int category = Integer.parseInt(br.readLine());
+
                 switch (category) {
                     case 1: {
                         item = itemView.getItemByCategory(Category.IT);
@@ -63,14 +64,13 @@ public class OrderView {
                 System.out.println(ErrorMessage.SELECT_ERROR);
                 continue;
             }
-
             if (isGoBack) {
                 break;
             }
 
             if (item != null) {
                 orderService.createOrder(member, item);
-                System.out.println(item.getItemName()+" 주문 완료!\n");
+                System.out.println(item.getItemName() + " 주문 완료!\n");
             }
         }
     }

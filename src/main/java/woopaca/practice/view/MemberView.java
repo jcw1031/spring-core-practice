@@ -27,6 +27,7 @@ public class MemberView {
         try {
             loginSuccess(memberService.validateMember(id));
         } catch (IllegalArgumentException exception) {
+            System.out.println("무슨 일이야...");
             System.out.println(ErrorMessage.LOGIN_ERROR);
             new StartView();
         }
