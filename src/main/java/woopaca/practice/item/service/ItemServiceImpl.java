@@ -1,6 +1,5 @@
 package woopaca.practice.item.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
@@ -13,14 +12,17 @@ public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
 
-    @Autowired
     public ItemServiceImpl(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
 
     @Override
-    public void register(Item item) {
-        itemRepository.save(item);
+    public void register(List<Item> items) {
+        for (Item item : items) {
+            if (item != null) {
+                itemRepository.save(item);
+            }
+        }
     }
 
     @Override

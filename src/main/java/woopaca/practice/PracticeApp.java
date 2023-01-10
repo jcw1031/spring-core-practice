@@ -12,11 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeApp {
-    private static ItemService itemService;
 
     public static void main(String[] args) throws IOException {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        itemService = applicationContext.getBean(ItemService.class);
+        ItemService itemService = applicationContext.getBean(ItemService.class);
 
         List<Item> list = new ArrayList<>();
         list.add(new Item(1L, "맥북", 3400000, Category.IT));
@@ -29,9 +28,7 @@ public class PracticeApp {
         list.add(new Item(8L, "볼펜", 7000, Category.ETC));
         list.add(new Item(9L, "백팩", 119000, Category.ETC));
 
-        for (Item item : list) {
-            itemService.register(item);
-        }
+        itemService.register(list);
 
         new StartView();
 

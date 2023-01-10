@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ItemService {
 
-    void register(Item item);
+    void register(List<Item> items);
 
     List<Item> itemListInCategory(Category category);
 

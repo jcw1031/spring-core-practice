@@ -1,6 +1,5 @@
 package woopaca.practice.member.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.member.entity.Member;
@@ -11,7 +10,6 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
 
-    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
