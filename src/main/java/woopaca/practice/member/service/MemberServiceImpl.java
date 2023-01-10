@@ -1,7 +1,6 @@
 package woopaca.practice.member.service;
 
 import org.springframework.stereotype.Component;
-import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.member.entity.Member;
 import woopaca.practice.member.repository.MemberRepository;
 
@@ -16,7 +15,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void join(Member member) {
-        memberRepository.save(member);
+        Member findMember = memberRepository.findById(member.getId());
+        if (findMember == null) {
+            memberRepository.save(member);
+            return;
+        }
+        throw new IllegalArgumentException();
     }
 
     @Override
@@ -25,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
         if (member != null) {
             return member;
         }
-        throw new IllegalArgumentException(ErrorMessage.LOGIN_ERROR);
+        throw new IllegalArgumentException();
     }
 
     @Override

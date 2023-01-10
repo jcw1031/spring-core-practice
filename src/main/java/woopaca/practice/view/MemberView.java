@@ -1,8 +1,5 @@
 package woopaca.practice.view;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import woopaca.practice.AutoAppConfig;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.member.entity.Grade;
 import woopaca.practice.member.entity.Member;
@@ -12,21 +9,27 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static woopaca.practice.PracticeApp.APPLICATION_CONTEXT;
+
 public class MemberView {
 
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private final MemberService memberService;
 
     public MemberView() {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        memberService = applicationContext.getBean(MemberService.class);
+        memberService = APPLICATION_CONTEXT.getBean(MemberService.class);
     }
 
     public void isMember() throws IOException {
         System.out.println("\n아이디가 무엇인가요?");
         String id = br.readLine();
 
-        loginSuccess(memberService.validateMember(id));
+        try {
+            loginSuccess(memberService.validateMember(id));
+        } catch (IllegalArgumentException exception) {
+            System.out.println(ErrorMessage.LOGIN_ERROR);
+            new StartView();
+        }
     }
 
     public void isNotMember() throws IOException {
@@ -40,7 +43,13 @@ public class MemberView {
         name = br.readLine();
 
         Member member = new Member(id, name, Grade.VIP);
-        memberService.join(member);
+        try {
+            memberService.join(member);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(ErrorMessage.DUPLICATE_ID);
+            isNotMember();
+            return;
+        }
         isMember();
     }
 
@@ -74,6 +83,7 @@ public class MemberView {
 
             if (isLogout) {
                 System.out.println("안녕히 가세요.");
+//                new StartView();
                 break;
             }
         }

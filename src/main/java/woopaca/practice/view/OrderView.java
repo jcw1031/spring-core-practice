@@ -1,8 +1,5 @@
 package woopaca.practice.view;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import woopaca.practice.AutoAppConfig;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
@@ -15,14 +12,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import static woopaca.practice.PracticeApp.APPLICATION_CONTEXT;
+
 public class OrderView {
 
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private final OrderService orderService;
 
     public OrderView() {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        orderService = applicationContext.getBean(OrderService.class);
+        orderService = APPLICATION_CONTEXT.getBean(OrderService.class);
     }
 
     public void order(Member member) throws IOException {
@@ -34,31 +32,36 @@ public class OrderView {
             int category = Integer.parseInt(br.readLine());
             boolean isGoBack = false;
 
-            switch (category) {
-                case 1: {
-                    item = itemView.getItemByCategory(Category.IT);
-                    break;
+            try {
+                switch (category) {
+                    case 1: {
+                        item = itemView.getItemByCategory(Category.IT);
+                        break;
+                    }
+                    case 2: {
+                        item = itemView.getItemByCategory(Category.FOOD);
+                        break;
+                    }
+                    case 3: {
+                        item = itemView.getItemByCategory(Category.LIVING);
+                        break;
+                    }
+                    case 4: {
+                        item = itemView.getItemByCategory(Category.ETC);
+                        break;
+                    }
+                    case 5: {
+                        isGoBack = true;
+                        break;
+                    }
+                    default: {
+                        System.out.println(ErrorMessage.SELECT_ERROR);
+                        break;
+                    }
                 }
-                case 2: {
-                    item = itemView.getItemByCategory(Category.FOOD);
-                    break;
-                }
-                case 3: {
-                    item = itemView.getItemByCategory(Category.LIVING);
-                    break;
-                }
-                case 4: {
-                    item = itemView.getItemByCategory(Category.ETC);
-                    break;
-                }
-                case 5: {
-                    isGoBack = true;
-                    break;
-                }
-                default: {
-                    System.out.println(ErrorMessage.SELECT_ERROR);
-                    break;
-                }
+            } catch (IllegalArgumentException exception) {
+                System.out.println(ErrorMessage.SELECT_ERROR);
+                continue;
             }
 
             if (isGoBack) {

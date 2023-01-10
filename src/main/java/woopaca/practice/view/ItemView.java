@@ -1,8 +1,5 @@
 package woopaca.practice.view;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import woopaca.practice.AutoAppConfig;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
@@ -13,14 +10,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import static woopaca.practice.PracticeApp.APPLICATION_CONTEXT;
+
 public class ItemView {
 
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private final ItemService itemService;
 
     public ItemView() {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        itemService = applicationContext.getBean(ItemService.class);
+        itemService = APPLICATION_CONTEXT.getBean(ItemService.class);
     }
 
     public Item getItemByCategory(Category category) throws IOException {
@@ -39,6 +37,10 @@ public class ItemView {
 
         System.out.println("구매할 상품의 번호를 입력하세요.");
         int input = Integer.parseInt(br.readLine());
+
+        if (input > list.size()) {
+            throw new IllegalArgumentException();
+        }
 
         return selectItem(list, input);
     }

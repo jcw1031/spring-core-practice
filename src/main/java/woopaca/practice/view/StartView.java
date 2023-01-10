@@ -1,7 +1,5 @@
 package woopaca.practice.view;
 
-import woopaca.practice.exception.ErrorMessage;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,6 +23,6 @@ public class StartView {
             return;
         }
 
-        System.out.println(ErrorMessage.SELECT_ERROR);
+        throw new IllegalArgumentException();
     }
 }

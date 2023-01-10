@@ -2,6 +2,7 @@ package woopaca.practice;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
 import woopaca.practice.item.service.ItemService;
@@ -12,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PracticeApp {
+    public static final ApplicationContext APPLICATION_CONTEXT = new AnnotationConfigApplicationContext(AutoAppConfig.class);
 
     public static void main(String[] args) throws IOException {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        ItemService itemService = applicationContext.getBean(ItemService.class);
+        ItemService itemService = APPLICATION_CONTEXT.getBean(ItemService.class);
 
         List<Item> list = new ArrayList<>();
         list.add(new Item(1L, "맥북", 3400000, Category.IT));
@@ -30,7 +31,13 @@ public class PracticeApp {
 
         itemService.register(list);
 
-        new StartView();
-
+        while (true) {
+            try {
+                new StartView();
+                break;
+            } catch (IllegalArgumentException exception) {
+                System.out.println(ErrorMessage.SELECT_ERROR);
+            }
+        }
     }
 }
