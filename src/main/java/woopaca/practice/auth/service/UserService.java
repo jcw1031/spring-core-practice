@@ -1,6 +1,7 @@
 package woopaca.practice.auth.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import woopaca.practice.auth.domain.User;
 import woopaca.practice.auth.exception.AppException;
@@ -12,6 +13,7 @@ import woopaca.practice.auth.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder;
 
     public String join(String username, String password) {
         userRepository.findByUsername(username)
@@ -21,7 +23,7 @@ public class UserService {
 
         User user = User.builder()
                 .username(username)
-                .password(password)
+                .password(encoder.encode(password))
                 .build();
         userRepository.save(user);
 
