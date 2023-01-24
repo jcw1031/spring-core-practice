@@ -24,6 +24,15 @@ public class JwtUtil {
                 .compact();
     }
 
+    public static String getUsername(String token, SecretKey secretKey) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("username", String.class);
+    }
+
     public static boolean isExpired(String token, SecretKey secretKey) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)

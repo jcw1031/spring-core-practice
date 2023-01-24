@@ -1,6 +1,7 @@
 package woopaca.practice.auth.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReviewController {
 
     @PostMapping
-    public ResponseEntity<String> writeReview() {
-        return ResponseEntity.ok().body("리뷰가 등록되었습니다.");
+    public ResponseEntity<String> writeReview(Authentication authentication) {
+        return ResponseEntity.ok().body(authentication.getName()+ " 님, 리뷰가 작성되었습니다.");
     }
 }
