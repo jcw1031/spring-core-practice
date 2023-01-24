@@ -1,16 +1,16 @@
 package woopaca.practice.order.entity;
 
 import woopaca.practice.item.entity.Item;
-import woopaca.practice.member.entity.Member;
+import woopaca.practice.member.entity.User;
 
 public class Order {
 
-    private Member member;
+    private User member;
     private Item item;
     private int price;
     private int discountPrice;
 
-    public Order(Member member, Item item, int price, int discountPrice) {
+    public Order(User member, Item item, int price, int discountPrice) {
         this.member = member;
         this.item = item;
         this.price = price;
@@ -21,11 +21,11 @@ public class Order {
         return price - discountPrice;
     }
 
-    public Member getMember() {
+    public User getMember() {
         return member;
     }
 
-    public void setMember(Member member) {
+    public void setMember(User member) {
         this.member = member;
     }
 

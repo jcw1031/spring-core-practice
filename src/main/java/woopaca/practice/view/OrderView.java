@@ -3,7 +3,7 @@ package woopaca.practice.view;
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.item.entity.Category;
 import woopaca.practice.item.entity.Item;
-import woopaca.practice.member.entity.Member;
+import woopaca.practice.member.entity.User;
 import woopaca.practice.order.entity.Order;
 import woopaca.practice.order.service.OrderService;
 
@@ -23,7 +23,7 @@ public class OrderView {
         orderService = APPLICATION_CONTEXT.getBean(OrderService.class);
     }
 
-    public void order(Member member) throws IOException {
+    public void order(User member) throws IOException {
         ItemView itemView = new ItemView();
         Item item = null;
 
@@ -75,7 +75,7 @@ public class OrderView {
         }
     }
 
-    public void getOrderList(Member member) {
+    public void getOrderList(User member) {
         System.out.println("[ 주문 조회 ]");
         List<Order> orderList = orderService.findOrderList(member);
 

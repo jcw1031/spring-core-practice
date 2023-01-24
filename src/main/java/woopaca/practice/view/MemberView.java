@@ -2,7 +2,7 @@ package woopaca.practice.view;
 
 import woopaca.practice.exception.ErrorMessage;
 import woopaca.practice.member.entity.Grade;
-import woopaca.practice.member.entity.Member;
+import woopaca.practice.member.entity.User;
 import woopaca.practice.member.service.MemberService;
 
 import java.io.BufferedReader;
@@ -43,7 +43,7 @@ public class MemberView {
         System.out.print("\n이름 : ");
         name = br.readLine();
 
-        Member member = new Member(id, name, Grade.VIP);
+        User member = new User(id, name, Grade.VIP);
         try {
             memberService.join(member);
         } catch (IllegalArgumentException exception) {
@@ -54,7 +54,7 @@ public class MemberView {
         isMember();
     }
 
-    public void loginSuccess(Member member) throws IOException {
+    public void loginSuccess(User member) throws IOException {
         OrderView orderView = new OrderView();
         System.out.println("반갑습니다 " + member.getName() + " 님!");
 

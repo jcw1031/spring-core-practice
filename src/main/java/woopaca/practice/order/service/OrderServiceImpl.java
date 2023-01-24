@@ -3,7 +3,7 @@ package woopaca.practice.order.service;
 import org.springframework.stereotype.Component;
 import woopaca.practice.discount.DiscountPolicy;
 import woopaca.practice.item.entity.Item;
-import woopaca.practice.member.entity.Member;
+import woopaca.practice.member.entity.User;
 import woopaca.practice.order.entity.Order;
 import woopaca.practice.order.repository.OrderRepository;
 
@@ -21,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(Member member, Item item) {
+    public Order createOrder(User member, Item item) {
         int price = item.getItemPrice();
         int discountPrice = discountPolicy.discount(member, price);
 
@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findOrderList(Member member) {
+    public List<Order> findOrderList(User member) {
         return orderRepository.findByMember(member);
     }
 }

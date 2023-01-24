@@ -1,12 +1,12 @@
 package woopaca.practice.member.entity;
 
-public class Member {
+public class User {
 
     private String id;
     private String name;
     private Grade grade;
 
-    public Member(String id, String name, Grade grade) {
+    public User(String id, String name, Grade grade) {
         this.id = id;
         this.name = name;
         this.grade = grade;

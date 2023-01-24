@@ -1,13 +1,13 @@
 package woopaca.practice.member.service;
 
-import woopaca.practice.member.entity.Member;
+import woopaca.practice.member.entity.User;
 
 public interface MemberService {
 
-    void join(Member member);
+    void join(User member);
 
-    Member validateMember(String id);
+    User validateMember(String id);
 
-    Member findMember(String id);
+    User findMember(String id);
 
 }

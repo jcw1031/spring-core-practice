@@ -1,7 +1,7 @@
 package woopaca.practice.order.repository;
 
 import org.springframework.stereotype.Component;
-import woopaca.practice.member.entity.Member;
+import woopaca.practice.member.entity.User;
 import woopaca.practice.order.entity.Order;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.Map;
 @Component
 public class MemoryOrderRepository implements OrderRepository {
 
-    Map<Member, List<Order>> memory = new HashMap<>();
+    Map<User, List<Order>> memory = new HashMap<>();
 
     @Override
     public void save(Order order) {
@@ -28,7 +28,7 @@ public class MemoryOrderRepository implements OrderRepository {
     }
 
     @Override
-    public List<Order> findByMember(Member member) {
+    public List<Order> findByMember(User member) {
         return memory.get(member);
     }
 }

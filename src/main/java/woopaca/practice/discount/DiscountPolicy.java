@@ -1,9 +1,9 @@
 package woopaca.practice.discount;
 
-import woopaca.practice.member.entity.Member;
+import woopaca.practice.member.entity.User;
 
 public interface DiscountPolicy {
 
-    int discount(Member member, int price);
+    int discount(User member, int price);
 
 }

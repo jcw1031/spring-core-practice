@@ -1,7 +1,7 @@
 package woopaca.practice.order.repository;
 
 import org.springframework.stereotype.Component;
-import woopaca.practice.member.entity.Member;
+import woopaca.practice.member.entity.User;
 import woopaca.practice.order.entity.Order;
 
 import java.util.List;
@@ -11,6 +11,6 @@ public interface OrderRepository {
 
     void save(Order order);
 
-    List<Order> findByMember(Member member);
+    List<Order> findByMember(User member);
 
 }
