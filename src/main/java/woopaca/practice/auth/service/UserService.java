@@ -1,14 +1,12 @@
 package woopaca.practice.auth.service;
 
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import woopaca.practice.auth.domain.User;
 import woopaca.practice.auth.exception.AppException;
 import woopaca.practice.auth.exception.ErrorCode;
-import woopaca.practice.auth.jwt.JwtTokenUtil;
+import woopaca.practice.auth.jwt.JwtUtil;
 import woopaca.practice.auth.repository.UserRepository;
 
 import javax.crypto.SecretKey;
@@ -20,9 +18,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
 
-//    @Value("${jwt.token.secret}")
-    private final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private final Long expireTimeMs = 1000 * 60 * 60L;
+//    @Value("${jwt.secret}")
+    private final SecretKey secretKey;
 
     public String join(String username, String password) {
         userRepository.findByUsername(username)
@@ -47,6 +44,6 @@ public class UserService {
             throw new AppException(ErrorCode.INVALID_PASSWORD, "비밀번호가 틀렸습니다.");
         }
 
-        return JwtTokenUtil.createToken(user.getUsername(), key, expireTimeMs);
+        return JwtUtil.createToken(user.getId(), user.getUsername(), secretKey);
     }
 }
