@@ -10,6 +10,8 @@ import woopaca.practice.auth.domain.dto.SignInRequestDTO;
 import woopaca.practice.auth.domain.dto.SignUpRequestDTO;
 import woopaca.practice.auth.service.UserService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -18,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signUp(@RequestBody SignUpRequestDTO signUpRequestDTO) {
+    public ResponseEntity<String> signUp(@Valid @RequestBody SignUpRequestDTO signUpRequestDTO) {
         userService.join(signUpRequestDTO.getUsername(), signUpRequestDTO.getPassword());
         return ResponseEntity.ok().body("회원가입이 완료되었습니다.");
     }

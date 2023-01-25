@@ -17,17 +17,15 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
-
-//    @Value("${jwt.secret}")
     private final SecretKey secretKey;
 
     public String join(String username, String password) {
         userRepository.findByUsername(username)
                 .ifPresent(user -> {
-                    throw new AppException(ErrorCode.USERNAME_DUPLICATE, "이미 존재하는 username입니다.");
+                    throw new AppException(ErrorCode.USERNAME_DUPLICATE);
                 });
 
-        woopaca.practice.auth.domain.User user = woopaca.practice.auth.domain.User.builder()
+        User user = User.builder()
                 .username(username)
                 .password(encoder.encode(password))
                 .build();
@@ -38,10 +36,10 @@ public class UserService {
 
     public String signIn(String username, String password) {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND, "존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND));
 
         if (!encoder.matches(password, user.getPassword())) { // 순서 주의
-            throw new AppException(ErrorCode.INVALID_PASSWORD, "비밀번호가 틀렸습니다.");
+            throw new AppException(ErrorCode.INVALID_PASSWORD);
         }
 
         return JwtUtil.createToken(user.getId(), user.getUsername(), secretKey);
